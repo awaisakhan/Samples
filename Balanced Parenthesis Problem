@@ -1,0 +1,27 @@
+#GIVEN STRING S, FOLLOWING RETURNS TRUE IF ALL PARENTHESIS ARE BALANCED (OPENED THEN CLOSED). RETURNS FALSE OTHERWISE.
+#INPUT STRING ASSUMES NO SPACES AND ONLY THREE TYPES OF COMMON PARENTHESIS {[(
+
+def parenthesis_check(s):
+    
+    # Odd length strings cannot have balanced parenthesis | return False if Odd length
+    if len(s)%2 != 0:
+        return False
+    
+    openers = set('({[') # Opening parenthesis set
+    matcher = set( [('(',')'), ('{','}'), ('[',']')] ) # Tuple pairs of parenthesis for verification
+    stack = [] # append and pop for parenthesis pairs
+    
+    for char in s:
+        
+        if char in openers:
+            stack.append(char) # opening braces are appended
+        else:
+            if len(stack)==0: # closing braces are verified and popped out
+                return False
+            
+            closer = stack.pop()
+            
+            if (closer,char) not in matcher: # not balanced if pairs don't match
+                return False
+    
+    return len(stack)==0
