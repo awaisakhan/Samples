@@ -1,0 +1,19 @@
+# GIVEN STRING S, THE FOLLOWING COMPRESSES THE STRING BY ELIMINATING REPEATED LETTERS WITH THEIR FREQUENCY (E.G AAAAA = A5)
+
+def string_compression (s):
+    
+    new_s=''            #INITIATE COMPRESSED STRING
+    i=1                 #LOOP/INDEX COUNTER
+    f=1                 #FREQUENCY COUNTER
+
+    while i<len(s):
+        if s[i]==s[i-1]:                        #CHECK IF LETTER IS RECURRING, KEEP COUNT OF RECURRING FREQUENCY IN F
+            f+=1
+        else:
+            new_s = new_s + s[i-1] + str(f)     #ADD LETTER AND ITS FREQUENCY TO COMPRESSED STRING
+            f=1
+        i+=1
+    
+    new_s = new_s + s[i-1] + str(f)
+    
+    return new_s
