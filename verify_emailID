@@ -1,0 +1,42 @@
+def email_checker(s):
+    
+    checker = [] # items will be added to this list if emailID is invalid
+    
+    # initial checks for @, spaces and fullstops
+    
+    if s.count('@')!=1 or '.' not in s or ' ' in s: 
+        return False
+    
+    # splitting string to extract name, domain and tld in separate variables
+    
+    email_list = s.split('@')
+    name = email_list[0]
+    email_list = email_list[1].split('.')
+    domain = email_list[0]
+    tld = email_list[1]
+    
+    #verify if name contains only letters A-Z, a-z, '.' or '_' | append checker if otherwise
+    
+    for char in name:
+        if (ord(char)>96 and ord(char)<123) or (ord(char)>64 and ord(char)< 91) or char == '_' or char == '.':
+            continue
+        else:
+            checker.append(0)
+    
+    #verify if domain name contains ONLY alphabetical letters | append checker otherwise 
+    
+    for char in domain:
+        if (ord(char)>96 and ord(char)<123) or (ord(char)>64 and ord(char)< 91):
+            continue
+        else:
+            checker.append(0)
+    
+    #tld can only be .com, .net or .org | append checker if otherwise
+    
+    if tld != 'com' and tld!='org' and tld!='net':
+        checker.append(0)
+    
+    #valid ID will return True | if checker is empty
+    
+    return len(checker)==0
+
